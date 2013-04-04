@@ -1,0 +1,38 @@
+Main document:
+http://www.linux-ha.org/wiki/Download
+step1:
+wget http://hg.linux-ha.org/glue/archive/tip.tar.bz2
+1)./autogen.sh
+2)./configure
+configure:error:You need glib2-devel installed in order to build cluster-glue
+yum install glib2-devel
+configure:error:libxml2 config not found
+yum install libxml2-devel
+configure:error:BZ2 libraries not found
+yum install bzip2-devel glib2-devel
+3)make
+Making all in libltdl  No rule to make target 'all'. Stop.
+this error means that you have loss libtool-ltdl-devel tools then you may do this:
+yum install libtool-ltdl-devel 
+then you should configure it again:
+./configure
+make
+a2x:Command not found
+you should install a2x  
+http://sourceforge.net/projects/asciidoc/?source=dlp
+download it from this web then tar it
+./configure
+make & make install
+then make again
+a2x:ERROR:"xsltproc" --stringparam callout.graphics.....[]Error 1
+the problem was solved with the installation of docbook-dtds, docbook-style-xsl and help2man packages.
+make install
+step 2:
+wget http://hg.linux-ha.org/dev/archive/STABLE-3.0.4.tar.bz2
+tar vxjf STABLE-3.0.4.tar.bz2
+cd Heartbeat
+./bootstrap
+./ConfigureMe configure
+make
+make install
+
