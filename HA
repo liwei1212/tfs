@@ -1,3 +1,6 @@
+http://dogdogcom.blog.51cto.com/2402458/498963
+
+
 Main document:
 http://www.linux-ha.org/wiki/Download
 step1:
@@ -35,4 +38,32 @@ cd Heartbeat
 ./ConfigureMe configure
 make
 make install
+wegt  https://github.com/ClusterLabs/resource-agents/tarball/v3.9.2
+tar it and cd it
+./autogen.sh
+./configure
+make
+make install
+---------------------------------------------------------------------------------------
+metadata-IPv6addr.xml:1: parser error : Document is empty
+
+^
+metadata-IPv6addr.xml:1: parser error : Start tag expected, '<' not found
+
+^
+unable to parse metadata-IPv6addr.xml
+gmake[2]: *** [ocf_heartbeat_IPv6addr.xml] Error 6
+gmake[2]: Leaving directory `/home/soft/ClusterLabs-resource-agents-b735277/doc'
+gmake[1]: *** [all-recursive] Error 1
+gmake[1]: Leaving directory `/home/soft/ClusterLabs-resource-agents-b735277'
+make: *** [all] Error 2
+解决办法：xml 没有下载成功,重头开始安装编译。
+../heartbeat/IPv6addr: error while loading shared libraries: libnet.so.1: cannot open shared object file: No such file or directory
+gmake[2]: *** [metadata-IPv6addr.xml] Error 127
+
+# yum install libnet*  重新编译可以了。
+
+then all soft has been installed, what we should do is to configure the two computers
+
+
 

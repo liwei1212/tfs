@@ -20,11 +20,13 @@ sudo ../gcc/configure --prefix=/usr/local/gcc_4.1.2 --enable-threads --disable-c
 LD_LIBRARY_PATH=/usr/local/gcc_4.1.2/lib:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH
 
-3)tfs安装［文件TFS_SVN下，release-2.2.14和tb-common-utils是原始文件,tfs是编译文件总目录，tb-common-utils和lib文件都放在其中，fts_server为生成后的文件（系统部署得到的文件）]
+3)tfs安装［文件TFS_SVN下，release-2.2.14和tb-common-utils是原始文件,解压到/usr/local目录下，目录情况如下：/usr/local/tfs和/usr/local/tb-common-utils.其中tfs是编译文件总目录，lib文件放在其中，/root/tfs_bin是系统部署得到的文件）]
 svn checkout www......
+cp release-2.2.14 -r /usr/local/tfs
+cp tb-commom/utils -r /usr/local/tb-common-utils
 automake,autoconf,libtool包安装
 libuuid-devel,zlib-devel,mysql-devel，readline-devel包安装
-将export TBLIB_ROOT="/home/jssX/tfs_svn/tfs/lib"[替换X啊，亲！！！]加入~/.bash_profile
+将export TBLIB_ROOT="/usr/local/tfs/lib"[替换X啊，亲！！！]加入~/.bash_profile
 然后source ~/.bash_profile
 编译时出现报错：configure: error: C++ compiler cannot create executables 。
 yum install gcc gcc-c++ gcc-g77
@@ -33,7 +35,7 @@ ln -s /usr/local/gcc_4.1.2/bin/gcc /usr/bin/gcc
 rm /usr/bin/g++
 ln -s /usr/local/gcc_4.1.2/bin/g++ /usr/bin/g++
 导致这个问题是由于gcc组件安装不完整。。
- ./configure --prefix=/home/jss3/tfs_svn/tfs_server --with-tblib-root=/home/jss3/tfs_svn/tfs/lib
+ ./configure
 安装jemalloc
 wget http://www.canonware.com/download/jemalloc/jemalloc-2.2.5.tar.bz2 .
 tar -jxvf jemalloc-2.2.5.tar.bz2
