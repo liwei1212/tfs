@@ -1,17 +1,39 @@
+设置sshd开机启动:
+chkconfig sshd on
+
 1）网络配置：
 /sbin/ifconfig eth0:1 192.168.7.3 netmask 255.255.255.0  (设置IP)
 开机启动  /etc/rc.local
 IP配置文件：vi /etc/sysconfig/network-script/ifcfg-eth0
 ifconfig查看网络相关状态
+2)
+P:xxx is not in the sudoers file. This incident will be reported.
+S:vi /etc/sudoers.
+insert:root ALL=(ALL) ALL
+your_user_name ALL=(ALL) ALL
+
 
 2）安装GCC：
+http://blog.csdn.net/jlbo2004/article/details/6539032
+download gcc from http://gcc.gnu.org/ 
+%tar -xjvf gcc-4.1.2.tar.bz2
+建立gcc的objdir
+%mkdir gcc_build
+%cd gcc_build
+建立安装目录
+%mkdir /usr/loca/gcc_4.1.2
+安装依赖包：
 sudo yum install flex
 sudo yum install bison
 sudo yum install texinfo({tip:because of the version is not match so we should change it}  {file:"../gcc/configure" change [2-9]to [1-9]})
 # sudo yum -y install glibc-devel.i686 glibc-devel(不同的机器不一样)
-
-http://blog.csdn.net/jlbo2004/article/details/6539032
+配置:
 sudo ../gcc/configure --prefix=/usr/local/gcc_4.1.2 --enable-threads --disable-checking --enable--long-long --enable-languages=c,c++,java
+编译:
+make
+安装:
+make install
+设置连接:
 % cd /usr/bin
 % ln -s ${destdir}/bin/gcc gcc4
 % ln -s ${destdir}/bin/g++ g++4
@@ -28,6 +50,11 @@ automake,autoconf,libtool包安装
 libuuid-devel,zlib-devel,mysql-devel，readline-devel包安装
 将export TBLIB_ROOT="/usr/local/tfs/lib"[替换X啊，亲！！！]加入~/.bash_profile
 然后source ~/.bash_profile
+%cd tb-common-utils
+%sh build.sh
+%cd ../tfs
+%./build.sh init
+%./configure
 编译时出现报错：configure: error: C++ compiler cannot create executables 。
 yum install gcc gcc-c++ gcc-g77
 rm /usr/bin/gcc  
@@ -44,7 +71,7 @@ ldconfig
 如果出错：checking for tc_cfree in -ltcmalloc... no
 这是因为后面的tfs版本使用tcmalloc库了
 可以在config时加--without-tcmalloc参数，重新编译
-安装tcmalloc
+或者安装tcmalloc
 #tar zxvf libunwind-0.9.tar.gz
 #cd libunwind-0.99
 CFLAGS=-fPIC ./configure
@@ -58,6 +85,11 @@ make CFLAGS=-fPIC install
 #make install
 echo "/usr/local/lib" > /etc/ld.so.conf.d/usr_local_lib.conf
 /sbin/ldconfig
+重新初始化并配置
+./build.sh init
+./configure
+make 
+make install
 挂载移动硬盘：mount -t ntfs-3g /dev/sdX  /mnt/XXX
 
 修改matlab安装目录下bin目录下的matlab启动就可以一劳永逸，具体方法如下：
