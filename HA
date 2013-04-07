@@ -66,4 +66,13 @@ gmake[2]: *** [metadata-IPv6addr.xml] Error 127
 then all soft has been installed, what we should do is to configure the two computers
 
 
+Pacemaker install
+tar ....
+./autogen.sh
+./configure
+error:libxslt 少了
+yum install libxslt-devel
+./configure
+make
+make install
 
