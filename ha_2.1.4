@@ -1,0 +1,33 @@
+1) creat group and user for the 
+#groupadd -g 694 haclient
+#useradd -u 694 -g haclient hacluster
+2)Heartbeat installation
+#wegt libnet.tar.gz and heartbeat-2.1.4.tar.bz2
+#tar xf libnet.tar.gz
+#cd libnet
+#./configure
+#make
+#make install
+install heartbeat
+#tar xf heartbeat.tar.bz2
+#cd heartbeat-2.1.4
+安装依赖包yum install libtool
+#./ConfigureMe configure
+Error:'COPYING.LIB' not found in '/usr/share/libtool/libltdl'
+yum instll libtool-ltdl-devel
+error:The following required components noted earlier are missing:
+	glib2-devel
+yum install glib2-devel
+#make
+error:libxml/entities.h:No such file or directory
+yum install libxml2-devel
+重新配置并make
+error:"BZ_OK" undeclare
+yum install  bzip2-devel
+重新配置并make就可以了
+#make install
+error: will not overwrite just-created '/usr/lib/ocf/resource.d//heartbeat/drbd'whith 'drbd'
+#make install
+
+
+
