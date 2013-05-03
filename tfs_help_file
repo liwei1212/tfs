@@ -91,12 +91,30 @@ echo "/usr/local/lib" > /etc/ld.so.conf.d/usr_local_lib.conf
 make 
 make install
 挂载移动硬盘：mount -t ntfs-3g /dev/sdX  /mnt/XXX
+安装完成后的系统：
+192.168.5.27和192.168.5.24是主服务器
+192.168.5.21和192.168.5.213是数据服务器
+受到打开文件数的影响   每次开机前都要设置打开文件数多少
+#ulimit 65535  (不知道这个数据对于系统的影响，所以目前都是系统默认值，每次都要修改)
+服务器执行：
+#server heartbeat start (打开心跳功能)
+#server iptables stop  (关闭防火墙)
+数据服务器执行：
+#mount /dev/sdb  /datb/disk1   (挂载数据盘)
+#./script admin_ds  (打开数据服务)
+#server iptables stop
 
+()安装MATLAB 
+yum install libXp*
 修改matlab安装目录下bin目录下的matlab启动就可以一劳永逸，具体方法如下：
 a、进入matlab安装目录下的bin目录
 b、sudo vi matlab
 c、在#! /bin/sh的下一行加上 LANG=en_AU.UTF-8 LANG=en_AU.UTF-8 XMODIFIERS=
+ 或者：vi /etc/profile
+ 在最后加上export PATH=$PATH:/opt/matlab/bin
+ source /etc/profile
 
+()安装git
 wget http://www.codemonkey.org.uk/projects/git-snapshots/git/git-latest.tar.gz
 tar xzvf git-latest.tar.gz
 cd git-2011-11-30 ＃你的目录可能不是这个
